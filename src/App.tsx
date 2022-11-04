@@ -1,23 +1,28 @@
 import React from "react";
-import logo from "./logo.svg";
+import { Row, Col } from "react-bootstrap";
+import { Outlet, Link } from "react-router-dom";
 
-function App() {
+function App({children} :{children: React.ReactNode}) {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Row className="container">
+        <Col lg={3} id="sidebar">
+          <ul className="nav flex-column">
+            <li className="nav-item">
+              <Link to="/">Home</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="contacts">Contacts</Link>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">Link</a>
+            </li>
+          </ul>
+        </Col>
+        <Col lg={9} id="content">
+          <Outlet />
+        </Col>
+      </Row>
     </div>
   );
 }
