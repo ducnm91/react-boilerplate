@@ -3,6 +3,7 @@ import App from "App";
 import HomePage from "views/HomePage";
 import ErrorPage from "views/ErrorPage";
 import ContactPage from "views/ContactPage";
+import FormPage from "views/FormPage";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
         path: "contacts",
         element: <ContactPage />,
       },
+      {
+        path: "form",
+        element: <FormPage />,
+      }
     ],
   }
 ]);
