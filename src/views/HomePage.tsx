@@ -1,7 +1,9 @@
 import React from "react";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { useTranslation } from "react-i18next";
 
 function HomePage() {
+  const { t } = useTranslation(['translation']);
   return (
     <>
       <HelmetProvider>
@@ -9,7 +11,7 @@ function HomePage() {
           <title>Home page</title>
         </Helmet>
       </HelmetProvider>
-      <h1>Home page</h1>
+      <h2>{t('Welcome to React')}</h2>
     </>
   );
 };
