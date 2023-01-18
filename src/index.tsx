@@ -2,19 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "assests/scss/index.scss";
 import reportWebVitals from "./reportWebVitals";
-import { RouterProvider } from "react-router-dom";
-import router from "./routers";
+import { Routes, Route, BrowserRouter, Link } from "react-router-dom";
 import store from "store";
 import { Provider } from "react-redux";
 import "./i18n";
+import App from "App";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <App />
     </Provider>
   </React.StrictMode>
 );

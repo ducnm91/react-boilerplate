@@ -1,31 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import { Outlet, Link } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Link } from "react-router-dom";
+import HomePage from "views/HomePage";
+import ContactPage from "views/ContactPage";
+import FormPage from "views/FormPage";
+import LoginPage from "views/Auth/Login";
+import ProtectedRoute from "ultil/ProtectedRoute";
 
-function App({ children }: { children: React.ReactNode }) {
+const Navigation = () => (
+  <nav>
+    <Link to="/home">Home</Link>
+    <Link to="/contact">contact</Link>
+    <Link to="/form">form</Link>
+    <Link to="/login">login</Link>
+  </nav>
+);
+
+function App() {
+  const [user, setUser] = React.useState("");
+
+  const handleLogin = () => setUser("robin");
+  const handleLogout = () => setUser("");
   return (
     <div className="App">
-      <Row className="container pt-4">
-        <Col lg={3} id="sidebar">
-          <ul className="list-group">
-            <li className="list-group-item">
-              <Link to="/">Home</Link>
-            </li>
-            <li className="list-group-item">
-              <Link to="/form">Form</Link>
-            </li>
-            <li className="list-group-item">
-              <Link to="contacts">Contacts</Link>
-            </li>
-            <li className="list-group-item">
-              <Link to="/404">404</Link>
-            </li>
-          </ul>
-        </Col>
-        <Col lg={9} id="content">
-          <Outlet />
-        </Col>
-      </Row>
+      <BrowserRouter>
+        <Navigation />
+        {user ? (
+          <button onClick={handleLogout}>Sign Out</button>
+        ) : (
+          <button onClick={handleLogin}>Sign In</button>
+        )}
+        <Routes>
+          <Route index element={<ContactPage />} />
+          <Route element={<ProtectedRoute isAllowed={!!user} />}>
+            <Route path="home" element={<HomePage />} />
+          </Route>
+          <Route path="contact" element={<ContactPage />} />
+          <Route path="form" element={<FormPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="*" element={<p>There's nothing here: 404!</p>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import HomePage from "views/HomePage";
 import ErrorPage from "views/ErrorPage";
 import ContactPage from "views/ContactPage";
 import FormPage from "views/FormPage";
+import LoginPage from "views/Auth/Login";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "form",
         element: <FormPage />,
+      },
+      {
+        path: "login",
+        element: <LoginPage />,
       },
     ],
   },
