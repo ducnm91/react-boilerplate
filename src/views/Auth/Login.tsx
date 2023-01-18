@@ -3,18 +3,27 @@ import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "store/auth/authSlice";
+import axios from "../../ultil/axios";
 
 function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [name, setName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const handleLogin = () => {
     if (!name.trim().length) {
       return;
     }
-    localStorage.setItem("ACCESS_TOKEN", "xxx");
-    dispatch(login());
-    navigate("/home");
+    axios
+      .post("/test_api", { name })
+      .then((res) => {
+        dispatch(login());
+        localStorage.setItem("ACCESS_TOKEN", "xxx");
+        navigate("/home");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
   return (
     <>

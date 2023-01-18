@@ -6,8 +6,8 @@ import HomePage from "views/HomePage";
 import ContactPage from "views/ContactPage";
 import FormPage from "views/FormPage";
 import LoginPage from "views/Auth/Login";
-import ProtectedRoute from "ultil/ProtectedRoute";
-import AuthRoute from "ultil/AuthRoute";
+import ProtectedRoute from "routers/ProtectedRoute";
+import AuthRoute from "routers/AuthRoute";
 
 const Navigation = () => (
   <nav>

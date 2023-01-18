@@ -10,7 +10,8 @@ export const authSlice = createSlice({
       state.isAuth = true;
     },
     logout: (state) => {
-      state.false = true;
+      state.isAuth = false;
+      localStorage.removeItem("ACCESS_TOKEN");
     },
   },
 });
