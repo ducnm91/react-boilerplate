@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route, BrowserRouter, Link } from "react-router-dom";
 import HomePage from "views/HomePage";
 import ContactPage from "views/ContactPage";
 import FormPage from "views/FormPage";
 import LoginPage from "views/Auth/Login";
 import ProtectedRoute from "ultil/ProtectedRoute";
+import AuthRoute from "ultil/AuthRoute";
 
 const Navigation = () => (
   <nav>
@@ -17,27 +19,23 @@ const Navigation = () => (
 );
 
 function App() {
+  const { isAuth } = useSelector((state: any) => state.auth);
   const [user, setUser] = React.useState("");
 
-  const handleLogin = () => setUser("robin");
-  const handleLogout = () => setUser("");
   return (
     <div className="App">
       <BrowserRouter>
         <Navigation />
-        {user ? (
-          <button onClick={handleLogout}>Sign Out</button>
-        ) : (
-          <button onClick={handleLogin}>Sign In</button>
-        )}
         <Routes>
-          <Route index element={<ContactPage />} />
-          <Route element={<ProtectedRoute isAllowed={!!user} />}>
+          <Route element={<ProtectedRoute isAllowed={isAuth} />}>
+            <Route index element={<HomePage />} />
             <Route path="home" element={<HomePage />} />
+            <Route path="contact" element={<ContactPage />} />
+            <Route path="form" element={<FormPage />} />
           </Route>
-          <Route path="contact" element={<ContactPage />} />
-          <Route path="form" element={<FormPage />} />
-          <Route path="login" element={<LoginPage />} />
+          <Route element={<AuthRoute isAllowed={!isAuth} />}>
+            <Route path="login" element={<LoginPage />} />
+          </Route>
           <Route path="*" element={<p>There's nothing here: 404!</p>} />
         </Routes>
       </BrowserRouter>

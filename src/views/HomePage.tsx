@@ -1,6 +1,5 @@
 import React from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import MouseTracker from "components/RenderProp";
 
